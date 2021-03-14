@@ -60,8 +60,8 @@ def delete_entry(title):
 def add():
 	if request.method == 'POST':
 		note = dict(request.form)
-		today = str(datetime.now())
-		note['date_posted'] = today.strftime('%B %d,%Y %H:%:M:%S')
+		today = datetime.now().strftime('%B %d,%Y %H:%:M:%S')
+		note['date_posted'] = str(today)
 		add_note((note['title'],note['author'],note['date_posted']))
 	return render_template('add.html')	
 
