@@ -1,1 +1,1 @@
-web: gunicorn flasknotes.wsgi --log-file -
+web: gunicorn flasknotes:app
