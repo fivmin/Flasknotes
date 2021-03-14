@@ -61,7 +61,7 @@ def add():
 	if request.method == 'POST':
 		note = dict(request.form)
 		today = str(datetime.now())
-		note['date_posted'] = today
+		note['date_posted'] = today.strftime('%B %d,%Y %H:%:M:%S')
 		add_note((note['title'],note['author'],note['date_posted']))
 	return render_template('add.html')	
 
