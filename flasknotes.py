@@ -44,7 +44,7 @@ def create_table():
 class Note(db.Model):
     __tablename__ = "notes"
     id      = db.Column(db.Integer, primary_key = True)
-    note   = db.Column(db.String(450), unique = True)
+    note   = db.Column(db.String(450))
     date   = db.Column(db.String(250))
     body  = db.Column(db.String(700))
     op_1 = db.Column(db.String(700))
