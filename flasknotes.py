@@ -83,7 +83,7 @@ def delete(id):
     obj = Note.query.filter_by(id = id).one()
     db.session.delete(obj)
     db.session.commit()
-    return render_template("home.html")
+    return redirect("/home")
 
 
 
