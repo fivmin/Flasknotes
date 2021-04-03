@@ -77,13 +77,16 @@ def add():
         db.session.commit()
         return redirect("/home")
 
-@app.route("/delete/<id>")
+@app.route("/delete/<id>" , methods = ['POST','GET'])
 def delete(id):
-    id = id
-    obj = Note.query.filter_by(id = id).one()
-    db.session.delete(obj)
-    db.session.commit()
-    return redirect("/home")
+    if request.method == "GET":
+        return render_template('delete.html')
+    if request.method == "POST":
+        id = id
+        obj = Note.query.filter_by(id = id).one()
+        db.session.delete(obj)
+        db.session.commit()
+        return redirect("/home")
 
 @app.route("/")
 @app.route("/home")
