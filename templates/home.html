@@ -1,16 +1,22 @@
 {%extends 'layout.html'%}
 {%block content%}
+	<div class = "container mx-auto">
+	<div class = "">
+	<div class = "row">
 	{%for post in posts%}
-		<div class = 'col-sm'>
-
-		<div class='card shadow rounded p-2 m-3' >
-			<h1>{{post[0]}}</h1>
-			<p>By <strong>{{post[1]}}</strong> on {{post[2]}}</p>	
-
+		<div class='col-md-4' >
+			<div class = "card rounded shadow p-3 m-3">
+				<h3 class = "pb-2"><b>{{post['note']}}</b></h3>
+				<p class = "pb-0">{{post['body']}}</p>	
+				<p class = "pl-1 pr-1 rounded" style="color: springgreen; background-color: black;">Deadline : {{post['deadline']}}</p>
+				<p class = "pb-0"><a href = "{{post['link']}}">Link for Assignment</a></p>
+				<a class = "btn btn-danger float-right" href = "{{ url_for('delete', id = post['id'])}}">Delete</a>
+			</div>
 		</div>
-		</div>
-		
 	{%endfor%}
+	</div>
+	</div>
+	</div>
 	<div class='text-center'>
 		<a href="/add" class='btn btn-primary text-center'>Add a Note</a>	
 	</div>

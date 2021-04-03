@@ -1,10 +1,13 @@
 {%extends 'layout.html'%}
 {%block content%}
+<div class = "container mx-auto">
+<div class = " container col-md-6 m-0">
 	<form method='POST' enctype="multipart/form-data">
-		<input type='text' name = 'note' placeholder="Subject" required class='form-control m-3'>
-		
-		<input type='text' name = 'body' placeholder="Details" required class='form-control m-3'>
-		<input type='text' name = 'deadline' placeholder="Deadline" required class='form-control m-3'>
+		<input type='text' name = 'note' placeholder="Subject" required class='form-control mb-3'>
+		<textarea required class = "form-control mb-3" rows = "3" placeholder = "Details" maxlength = "500" type = "text", name = "body"></textarea>
+
+		<input type='text' name = 'deadline' placeholder="Deadline" required class='form-control mb-3'>
+		<input type='text' name = 'link' placeholder="Link of Assignment" required class='form-control mb-3'>
 
 		<div class="text-center">
 			<input type='submit' class=' btn btn-secondary' >
@@ -12,4 +15,6 @@
 		</div>
 		
 	</form>
+</div>
+</div>
 {%endblock content%}

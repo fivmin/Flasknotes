@@ -48,11 +48,11 @@ class Note(db.Model):
     date   = db.Column(db.String(250))
     body  = db.Column(db.String(700))
     op_1 = db.Column(db.String(700))
+    deadline = db.Column(db.String(700))
     op_2 = db.Column(db.String(120))
     op_3 = db.Column(db.String(100))
-    deadline = db.Column(db.String(700))
 
-    def __init__(self, note, image):
+    def __init__(self, note):
         self.note = note['note']
         self.date = note['date']
         self.body = note['body']
@@ -60,11 +60,14 @@ class Note(db.Model):
         # self.op_1 = note['op_1']
         # self.op_2 = note['op_2']
         # self.op_3 = note['op_3']
+        self.op_1 = note['link']
         self.deadline = note['deadline']
 
 
 @app.route("/add" , methods = ['POST','GET'])
 def add():
+    if request.method == "GET":
+        return render_template('add.html')
     if request.method == 'POST':
         note = dict(request.form)
         today = datetime.now().strftime('%B %d, %Y %H:%M:%S')
@@ -72,18 +75,15 @@ def add():
         note = Note(note)
         db.session.add(note)
         db.session.commit()
-    return render_template('add.html')	
+        return redirect("/home")
 
-@app.route("/delete" , methods = ['POST','GET'])
-def delete():
-    if request.method == "GET":
-        return render_template("delete.html", post = False)
-    elif request.method == "POST":
-        note = dict(request.form)
-        obj = Note.query.filter_by(note = d['note']).one()
-        db.session.delete(obj)
-        db.session.commit()
-        return render_template("delete.html", post = True)
+@app.route("/delete/<id>")
+def delete(id):
+    id = id
+    obj = Note.query.filter_by(note = d['id']).one()
+    db.session.delete(obj)
+    db.session.commit()
+    return render_template("home.html")
 
 
 
@@ -92,8 +92,9 @@ def delete():
 @app.route("/")
 @app.route("/home")
 def home():
-	posts = Note.query.all()
-	return render_template('home.html',posts = posts)
+    posts = Note.query.all()
+    # print(posts)
+    return render_template('home.html',posts = posts)
 
 @app.route("/about")
 def about():
